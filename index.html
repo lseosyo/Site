@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>라현사회탐구교습소 | 한국사 · 세계사 · 통합사회</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2A2622;
+    --ink-soft:#3A342C;
+    --paper:#E7DFCB;
+    --paper-soft:#EFE9D9;
+    --paper-white:#F6F2E6;
+    --seal:#AE3427;
+    --seal-dark:#8C2A20;
+    --celadon:#4B6E62;
+    --gold:#B8933E;
+    --line:rgba(42,38,34,0.14);
+  }
+  *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
+  html{scroll-behavior:smooth;}
+  a, button{ -webkit-tap-highlight-color:transparent; outline:none; }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans KR', sans-serif;
+    font-weight:400;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Song Myung', serif;
+  }
+  .mono{
+    font-family:'Song Myung', serif;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  ::selection{ background:var(--seal); color:var(--paper-white); }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(231,223,203,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+    max-width:1120px; margin:0 auto;
+  }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .seal-mark{
+    width:42px; height:42px; border-radius:6px;
+    display:flex; align-items:center; justify-content:center;
+    transform:rotate(-1.5deg);
+  }
+  .brand-name{
+    font-family:'Song Myung', serif;
+    font-weight:700; font-size:19px;
+    letter-spacing:-0.2px;
+  }
+  .brand-name span{
+    display:block; font-family:'Song Myung', serif;
+    font-weight:400; font-size:11px; letter-spacing:2px;
+    color:var(--ink-soft); opacity:0.65; margin-top:2px;
+  }
+  nav ul{ list-style:none; display:flex; gap:32px; }
+  nav a{
+    font-size:14.5px; font-weight:500; position:relative; padding:4px 0;
+  }
+  nav a::after{
+    content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px;
+    background:var(--seal); transform:scaleX(0); transform-origin:left;
+    transition:transform .25s ease;
+  }
+  nav a:hover::after, nav a:focus-visible::after{ transform:scaleX(1); }
+  .nav-toggle{ display:none; background:none; border:none; font-size:22px; cursor:pointer; color:var(--ink); transition:transform .28s cubic-bezier(.4,0,.2,1); }
+  .nav-toggle.active{ transform:rotate(90deg); }
+
+  @media (max-width:760px){
+    nav{
+      display:flex; position:absolute; top:calc(100% + 8px); left:16px; right:16px;
+      background:var(--paper-soft); border:1px solid var(--line);
+      border-radius:14px;
+      padding:0 28px;
+      flex-direction:column;
+      max-height:0; overflow:hidden; opacity:0;
+      transform:translateY(-8px);
+      pointer-events:none;
+      box-shadow:0 14px 30px -12px rgba(42,38,34,0.25);
+      transition:max-height .32s cubic-bezier(.4,0,.2,1), opacity .22s ease, transform .28s cubic-bezier(.4,0,.2,1), padding .32s ease;
+    }
+    .nav-toggle{ display:block; }
+    nav.open{
+      max-height:320px; opacity:1;
+      transform:translateY(0);
+      pointer-events:auto;
+      padding:8px 28px 18px;
+    }
+    nav ul{ flex-direction:column; gap:16px; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:
+      radial-gradient(ellipse at 80% -10%, rgba(174,52,39,0.18), transparent 55%),
+      var(--ink);
+    color:var(--paper-white);
+    padding:96px 0 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:28px;
+    padding-bottom:64px;
+  }
+  .hero-eyebrow{
+    font-family:'Song Myung', serif;
+    font-size:12.5px; letter-spacing:3px; text-transform:uppercase;
+    color:var(--gold);
+    display:flex; align-items:center; gap:10px;
+  }
+  .hero-eyebrow::before{ content:""; width:28px; height:1px; background:var(--gold); display:inline-block; }
+  .hero h1{
+    font-size:clamp(34px, 6vw, 62px);
+    font-weight:900;
+    line-height:1.22;
+    letter-spacing:-0.5px;
+    max-width:820px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--paper);
+    background:linear-gradient(180deg, transparent 62%, rgba(174,52,39,0.55) 62%);
+  }
+  .hero p.lead{
+    max-width:560px;
+    font-size:17px;
+    color:rgba(246,242,230,0.78);
+    font-weight:300;
+  }
+  .cta-row{ display:flex; gap:14px; flex-wrap:wrap; margin-top:8px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 26px;
+    font-size:14.5px; font-weight:500;
+    border-radius:3px;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .18s ease, background .18s ease, border-color .18s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:var(--seal); color:var(--paper-white); }
+  .btn-primary:hover{ background:var(--seal-dark); }
+  .btn-ghost{ border-color:rgba(246,242,230,0.35); color:var(--paper-white); }
+  .btn-ghost:hover{ border-color:var(--paper-white); }
+
+  /* Timeline rail — signature element */
+  .timeline-rail{
+    position:relative;
+    margin-top:20px;
+    padding:26px 0 30px;
+    border-top:1px solid rgba(246,242,230,0.16);
+    overflow-x:auto;
+  }
+  .timeline-track{
+    display:flex; align-items:flex-start; justify-content:space-between;
+    min-width:560px; position:relative;
+  }
+  .timeline-track::before{
+    content:""; position:absolute; top:6px; left:0; right:0; height:1px;
+    background:rgba(246,242,230,0.22);
+  }
+  .era{ display:flex; flex-direction:column; align-items:center; gap:10px; flex:1; text-align:center; }
+  .era-dot{ width:12px; height:12px; border-radius:50%; background:var(--paper); border:2px solid var(--ink); box-shadow:0 0 0 1px rgba(246,242,230,0.35); }
+  .era.current .era-dot{ background:var(--seal); }
+  .era-label{ font-family:'Song Myung', serif; font-size:12px; color:rgba(246,242,230,0.7); letter-spacing:0.5px; }
+  .era.current .era-label{ color:var(--paper); font-weight:500; }
+
+  /* ---------- Sections generic ---------- */
+  section{ padding:90px 0; }
+  .section-head{ margin-bottom:52px; max-width:640px; }
+  .section-eyebrow{
+    font-family:'Song Myung', serif; font-size:12px; letter-spacing:3px;
+    text-transform:uppercase; color:var(--seal); margin-bottom:14px; display:block;
+  }
+  .section-head h2{
+    font-size:clamp(26px,3.6vw,36px); font-weight:700; letter-spacing:-0.3px; line-height:1.35;
+  }
+  .section-head p{ margin-top:14px; color:var(--ink-soft); font-size:15.5px; max-width:520px; }
+
+  /* ---------- About ---------- */
+  #about{ background:var(--paper-soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .about-text-only{ max-width:640px; }
+  .about-text-only h3{ font-size:22px; font-weight:700; margin-bottom:6px; }
+  .about-role{ font-family:'Song Myung', serif; font-size:12.5px; color:var(--celadon); letter-spacing:1px; margin-bottom:22px; display:block; }
+  .about-text-only p{ color:var(--ink-soft); margin-bottom:16px; font-size:15.5px; }
+  .credentials{ list-style:none; margin-top:22px; display:grid; gap:10px; }
+  .credentials li{ display:flex; gap:10px; font-size:14.5px; color:var(--ink-soft); }
+  .credentials li::before{ content:"—"; color:var(--seal); flex-shrink:0; }
+
+  /* ---------- Curriculum ---------- */
+  .curr-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; }
+  .curr-card{
+    background:var(--paper-white);
+    border:1px solid var(--line);
+    padding:32px 26px;
+    position:relative;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .curr-card:hover{ transform:translateY(-4px); box-shadow:0 14px 30px -18px rgba(42,38,34,0.4); }
+  .curr-card::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:4px;
+    background:var(--curr-accent, var(--seal));
+  }
+  .curr-tag{ font-family:'Song Myung', serif; font-size:11.5px; letter-spacing:2px; text-transform:uppercase; color:var(--curr-accent, var(--seal)); }
+  .curr-card h3{ font-size:20px; font-weight:700; margin:12px 0 12px; }
+  .curr-card p{ color:var(--ink-soft); font-size:14.5px; margin-bottom:18px; }
+  .curr-list{ list-style:none; display:grid; gap:8px; }
+  .curr-list li{ font-size:13.5px; color:var(--ink-soft); display:flex; gap:8px; align-items:baseline; }
+  .curr-list li::before{ content:"·"; color:var(--curr-accent, var(--seal)); font-weight:700; }
+
+  /* ---------- Testimonials ---------- */
+  .quote-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .quote-card{
+    background:var(--paper-white); border:1px solid var(--line); padding:30px 26px;
+    position:relative;
+  }
+  .quote-mark{
+    position:absolute; top:-14px; left:24px;
+    width:34px; height:34px; border-radius:50%; background:var(--ink-soft); color:var(--paper-white);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 0 3px var(--paper);
+  }
+  .quote-mark svg{ width:18px; height:18px; }
+  .quote-card p{ font-size:14.5px; color:var(--ink); margin-top:14px; line-height:1.75; }
+  .quote-who{ margin-top:18px; font-family:'Song Myung', serif; font-size:12px; color:var(--celadon); letter-spacing:0.5px; }
+
+  /* ---------- Location ---------- */
+  #location{ background:var(--ink); color:var(--paper-white); }
+  #location .section-eyebrow{ color:var(--gold); }
+  #location .section-head p{ color:rgba(246,242,230,0.7); }
+  .loc-grid{ max-width:560px; margin:0 auto; }
+  .contact-list{ list-style:none; display:grid; gap:22px; }
+  .contact-list li{ border-bottom:1px solid rgba(246,242,230,0.14); padding-bottom:18px; }
+  .contact-label{ font-family:'Song Myung', serif; font-size:11.5px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:8px; }
+  .contact-value{ font-size:16.5px; font-weight:500; }
+  .contact-sub{ font-size:13.5px; color:rgba(246,242,230,0.6); margin-top:4px; }
+
+  /* ---------- Footer ---------- */
+  footer{ background:var(--ink); border-top:1px solid rgba(246,242,230,0.14); color:rgba(246,242,230,0.55); padding:32px 0; }
+  .footer-inner{ display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center; font-size:12.5px; }
+  .footer-inner .brand-name{ color:var(--paper-white); font-size:14px; }
+
+  @media (max-width:820px){
+    .curr-grid{ grid-template-columns:1fr; }
+    .quote-grid{ grid-template-columns:1fr; }
+  }
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--seal); outline-offset:3px; }
+
+  /* reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- About detail view (in-page) ---------- */
+  .page-header{
+    background:
+      radial-gradient(ellipse at 80% -10%, rgba(174,52,39,0.18), transparent 55%),
+      var(--ink);
+    color:var(--paper-white);
+    padding:64px 0 48px;
+  }
+  .page-header .section-eyebrow{ color:var(--gold); }
+  .page-header h1{
+    font-family:'Song Myung', serif;
+    font-size:clamp(28px, 4.5vw, 42px);
+    font-weight:900;
+    letter-spacing:-0.4px;
+    margin-top:10px;
+  }
+  .page-header p{
+    margin-top:14px;
+    color:rgba(246,242,230,0.72);
+    font-size:15.5px;
+    max-width:560px;
+  }
+  #about{ padding:90px 0; }
+
+  /* ---------- Back button (detail views) ---------- */
+  .back-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Sans KR', sans-serif;
+    font-size:13.5px; font-weight:500;
+    color:rgba(246,242,230,0.85);
+    background:transparent;
+    border:1px solid rgba(246,242,230,0.3);
+    border-radius:3px;
+    padding:9px 16px;
+    cursor:pointer;
+    margin-bottom:22px;
+    transition:border-color .18s ease, background .18s ease, transform .18s ease;
+  }
+  .back-btn:hover{ border-color:rgba(246,242,230,0.7); background:rgba(246,242,230,0.06); transform:translateX(-2px); }
+  .back-btn svg{ width:14px; height:14px; }
+
+  /* ---------- Consult Modal ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; z-index:200;
+    background:rgba(20,21,24,0.62);
+    display:flex; align-items:center; justify-content:center;
+    padding:24px;
+    opacity:0; pointer-events:none;
+    transition:opacity .22s ease;
+  }
+  .modal-overlay.open{ opacity:1; pointer-events:auto; }
+  .modal-box{
+    width:100%; max-width:400px;
+    background:var(--paper-white);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:32px 28px 28px;
+    position:relative;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.45);
+    transform:translateY(14px) scale(0.98);
+    transition:transform .25s cubic-bezier(.4,0,.2,1);
+  }
+  .modal-overlay.open .modal-box{ transform:translateY(0) scale(1); }
+  .modal-close{
+    position:absolute; top:14px; right:14px;
+    width:32px; height:32px; border-radius:50%;
+    background:transparent; border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink-soft);
+    transition:background .18s ease;
+  }
+  .modal-close:hover{ background:rgba(42,38,34,0.06); }
+  .modal-close svg{ width:18px; height:18px; }
+  .modal-eyebrow{
+    font-family:'Song Myung', serif; font-size:11.5px; letter-spacing:2.5px;
+    text-transform:uppercase; color:var(--seal); display:block; margin-bottom:8px;
+  }
+  .modal-box h3{ font-size:21px; font-weight:700; margin-bottom:8px; }
+  .modal-box > p{ font-size:14px; color:var(--ink-soft); margin-bottom:26px; }
+  .modal-options{ display:grid; gap:12px; }
+  .modal-option{
+    display:flex; align-items:center; gap:14px;
+    padding:16px 18px;
+    border:1px solid var(--line);
+    border-radius:7px;
+    background:var(--paper-soft);
+    cursor:pointer;
+    text-align:left;
+    transition:border-color .18s ease, background .18s ease, transform .18s ease;
+  }
+  .modal-option:hover{ border-color:var(--seal); background:var(--paper); transform:translateY(-1px); }
+  .modal-option-icon{
+    flex-shrink:0; width:40px; height:40px; border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--ink); color:var(--paper-white);
+  }
+  .modal-option-icon svg{ width:19px; height:19px; }
+  .modal-option-text strong{ display:block; font-size:15px; font-weight:700; color:var(--ink); }
+  .modal-option-text span{ display:block; font-size:12.5px; color:var(--ink-soft); margin-top:2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="brand" href="javascript:void(0)" onclick="showHome(); return false;">
+      <div class="seal-mark">
+        <svg viewBox="-5 -5 110 110" width="34" height="34" aria-hidden="true">
+          <path d="M 98.5,48.8 C 99.7,74.3 80,96.2 50,97.4 C 20,98.5 1.5,76.6 1.5,50 C 1.5,23.4 20,1.5 50,1.5 C 80,0.3 97.4,23.4 98.5,48.8 Z"
+                fill="none" stroke="var(--seal)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.92"/>
+          <g transform="rotate(42 50 50)">
+            <polygon points="50,4 64,48 36,48" fill="var(--seal)"/>
+            <polygon points="36,48 64,48 50,96" fill="#E2D2A0"/>
+          </g>
+        </svg>
+      </div>
+      <div class="brand-name">라현사회탐구교습소<span>RAHYEON SOCIAL STUDIES</span></div>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false" onclick="toggleNav()">☰</button>
+    <nav id="mainnav">
+      <ul>
+        <li><a href="javascript:void(0)" onclick="goAbout(); return false;">소개</a></li>
+        <li><a href="javascript:void(0)" onclick="goSection('curriculum'); return false;">커리큘럼</a></li>
+        <li><a href="javascript:void(0)" onclick="goSection('reviews'); return false;">후기</a></li>
+        <li><a href="javascript:void(0)" onclick="goSection('location'); return false;">오시는 길</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div id="homeView">
+
+<section class="hero">
+  <div class="wrap">
+    <span class="hero-eyebrow">전학년 역사·세계사, 중·고등부 사회 전문</span>
+    <h1><span style="font-weight:400;">질문하는 아이,</span><br><em>생각하는 힘</em>!</h1>
+    <p class="lead">라현사회탐구교습소는 한국사·세계사·통합사회를 가르치는 사회탐구 전문 교습소입니다. 흐름을 이해하면 암기는 저절로 따라옵니다.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="javascript:void(0)" onclick="openConsultModal(); return false;">무료 상담 신청</a>
+      <a class="btn btn-ghost" href="javascript:void(0)" onclick="goSection('curriculum'); return false;">커리큘럼 보기</a>
+    </div>
+
+    <div class="timeline-rail" aria-hidden="true">
+      <div class="timeline-track">
+        <div class="era"><div class="era-dot"></div><div class="era-label">고조선</div></div>
+        <div class="era"><div class="era-dot"></div><div class="era-label">삼국시대</div></div>
+        <div class="era"><div class="era-dot"></div><div class="era-label">고려</div></div>
+        <div class="era"><div class="era-dot"></div><div class="era-label">조선</div></div>
+        <div class="era"><div class="era-dot"></div><div class="era-label">근대</div></div>
+        <div class="era current"><div class="era-dot"></div><div class="era-label">현대 · 라현</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="curriculum">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Curriculum</span>
+      <h2>세 과목, 하나의 흐름으로 연결합니다</h2>
+      <p>한국사·세계사·통합사회는 따로 배우면 암기, 함께 배우면 이해가 됩니다. 학년과 목표에 맞춰 반을 편성합니다.</p>
+    </div>
+    <div class="curr-grid">
+      <div class="curr-card reveal" style="--curr-accent:var(--seal)">
+        <span class="curr-tag">한국사</span>
+        <h3>고대부터 현대사까지</h3>
+        <p>수능 한국사 개념완성과 내신 서술형 대비를 함께 진행합니다.</p>
+        <ul class="curr-list">
+          <li>시대별 흐름 정리 강의</li>
+          <li>사료 해석 · 서술형 첨삭</li>
+          <li>한국사능력검정시험 연계반</li>
+        </ul>
+      </div>
+      <div class="curr-card reveal" style="--curr-accent:var(--celadon)">
+        <span class="curr-tag">세계사</span>
+        <h3>문명의 흐름과 접점</h3>
+        <p>동서양사를 비교하며 큰 그림을 먼저 잡고, 세부 사건으로 좁혀갑니다.</p>
+        <ul class="curr-list">
+          <li>지역사 · 문명 비교 수업</li>
+          <li>연표 기반 암기 훈련</li>
+          <li>내신 기출 · 서술형 대비</li>
+        </ul>
+      </div>
+      <div class="curr-card reveal" style="--curr-accent:var(--gold)">
+        <span class="curr-tag">통합사회 · 사회탐구</span>
+        <h3>중등 사회부터 고등 탐구까지</h3>
+        <p>중등 사회 기초 개념을 다지고, 고등 통합사회·사회탐구 선택과목으로 이어갑니다.</p>
+        <ul class="curr-list">
+          <li>중등 사회 개념 기초반</li>
+          <li>통합사회 내신 대비반</li>
+          <li>사회탐구 선택과목 상담</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Reviews</span>
+      <h2>학생과 학부모의 이야기</h2>
+      <p>라현사회탐구교습소와 함께한 학생·학부모님들의 실제 후기입니다.</p>
+    </div>
+    <div class="quote-grid">
+      <div class="quote-card reveal">
+        <div class="quote-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8v1H4v-1z"/></svg></div>
+        <p>선생님이 아이들을 너무 이뻐해주셔서 즐겁게 완주할 수 있었던 것 같아요!!</p>
+        <div class="quote-who">학부모 후기</div>
+      </div>
+      <div class="quote-card reveal">
+        <div class="quote-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8v1H4v-1z"/></svg></div>
+        <p>선생님 그동안 감사했습니다. 아이들이 선생님의 역사수업 외에도 열정을 배우고 선생님의 진심을 느꼈던 2년이었던 거 같네요. 늘 한결같이 아이들 예뻐해주시고 끝까지 함께해주셔서 감사했습니다.</p>
+        <div class="quote-who">학부모 후기</div>
+      </div>
+      <div class="quote-card reveal">
+        <div class="quote-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8v1H4v-1z"/></svg></div>
+        <p>46점에서 96점 됐다고 하네요. 3-2학기에 내신 오르기 힘든데, 덕분에 내신도 크게 올랐어요!!</p>
+        <div class="quote-who">학부모 후기</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="location">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Location</span>
+      <h2>오시는 길 · 상담 신청</h2>
+      <p>전화, 문자, 방문 상담 모두 가능합니다.</p>
+    </div>
+    <div class="loc-grid">
+      <ul class="contact-list reveal">
+        <li>
+          <span class="contact-label">주소</span>
+          <div class="contact-value">경기 이천시 증신로291번길 133 201-1호</div>
+          <div class="contact-sub"><a href="https://www.google.com/maps/dir/?api=1&destination=라현사회탐구교습소 경기 이천시 증신로291번길 133" target="_blank" rel="noopener">구글 지도에서 길찾기 →</a></div>
+        </li>
+        <li>
+          <span class="contact-label">전화</span>
+          <div class="contact-value"><a href="tel:01031223756">010-3122-3756</a></div>
+          <div class="contact-sub">전화 · 문자 상담 가능</div>
+        </li>
+        <li>
+          <span class="contact-label">블로그</span>
+          <div class="contact-value"><a href="https://m.blog.naver.com/nahyunhah" target="_blank" rel="noopener">네이버 블로그</a></div>
+          <div class="contact-sub">수업 후기 · 학습 자료 · 공지사항</div>
+        </li>
+        <li>
+          <span class="contact-label">교습비</span>
+          <div class="contact-value">학년·과정에 따라 상이합니다</div>
+          <div class="contact-sub">자세한 사항은 학원으로 문의 부탁드립니다</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div><!-- /#homeView -->
+
+<div id="aboutView" style="display:none;">
+  <section class="page-header">
+    <div class="wrap">
+      <button class="back-btn" onclick="goBack()" aria-label="이전 화면으로 돌아가기">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        뒤로가기
+      </button>
+      <span class="section-eyebrow">About</span>
+      <h1>원장 소개</h1>
+      <p>정성을 다하는 학원, 이천 역사·사회는 여기다.</p>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about-text-only reveal in">
+      <span class="about-role">원장 · 나현하</span>
+      <h3>“정성을 다하는 학원, 이천 역사·사회는 여기다”</h3>
+      <p>나현하 원장은 11년간 한 자리에서 한국사·세계사·사회를 가르쳐온 강사입니다. 오랜 시간 같은 자리를 지켜온 만큼, 학생 한 명 한 명의 학습 습관과 약한 부분을 꼼꼼히 짚어내는 데 익숙합니다.</p>
+      <p>학생 수를 늘리기보다, 이미 맡은 학생에게 정성을 다하는 것을 원칙으로 삼고 있습니다. 이천에서 역사·사회를 제대로 배우고 싶다면 라현사회탐구교습소가 그 답이 되겠습니다.</p>
+      <ul class="credentials">
+        <li>중등학교 정교사(2급) 자격 보유</li>
+        <li>11년 경력의 역사·사회 전문 강사</li>
+        <li>소수정예 최대 4인 그룹 수업 원칙</li>
+        <li>학생별 맞춤 첨삭 · 흐름 중심 수업</li>
+      </ul>
+    </div>
+  </section>
+</div><!-- /#aboutView -->
+
+<div class="modal-overlay" id="consultModal" onclick="if(event.target===this) closeConsultModal();">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="consultModalTitle">
+    <button class="modal-close" onclick="closeConsultModal()" aria-label="닫기">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <span class="modal-eyebrow">Consultation</span>
+    <h3 id="consultModalTitle">무료 상담 신청</h3>
+    <p>아래 번호로 편하게 상담 신청해 주세요.</p>
+    <div class="modal-options">
+      <a class="modal-option" href="tel:01031223756">
+        <span class="modal-option-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </span>
+        <span class="modal-option-text">
+          <strong>전화 상담</strong>
+          <span>010-3122-3756 · 바로 연결</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="brand-name">라현사회탐구교습소</div>
+    <div>© 2026 라현사회탐구교습소</div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el=>io.observe(el));
+
+  // ---------- 무료 상담 신청 팝업 ----------
+  function openConsultModal(){
+    document.getElementById('consultModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeConsultModal(){
+    document.getElementById('consultModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeConsultModal();
+  });
+
+  function toggleNav(){
+    const nav = document.getElementById('mainnav');
+    const btn = document.getElementById('navToggle');
+    const isOpen = nav.classList.toggle('open');
+    btn.classList.toggle('active', isOpen);
+    btn.textContent = isOpen ? '✕' : '☰';
+    btn.setAttribute('aria-expanded', isOpen);
+  }
+
+  // ---------- 화면 전환: 홈 ↔ 소개(상세) ----------
+  // 브라우저 뒤로가기/앞으로가기 버튼이 동작하도록 History API(pushState/popstate)를 사용합니다.
+  const VIEWS = ['home', 'about'];
+
+  function hideAllViews(){
+    document.getElementById('homeView').style.display = 'none';
+    document.getElementById('aboutView').style.display = 'none';
+  }
+
+  // history 조작 없이 화면만 바꾸는 내부 함수 (popstate 처리에도 재사용)
+  function renderView(view){
+    hideAllViews();
+    const map = { home:'homeView', about:'aboutView' };
+    const id = map[view] || 'homeView';
+    document.getElementById(id).style.display = '';
+    window.scrollTo(0, 0);
+  }
+
+  // 화면 전환 + history에 새 기록 추가 (링크/버튼 클릭 시 호출)
+  // 주소(URL)는 건드리지 않고 history state만 기록합니다.
+  // (about:srcdoc 미리보기 환경 등에서는 URL을 바꾸려 하면 SecurityError가 발생하기 때문)
+  function navigateTo(view, replace){
+    renderView(view);
+    const state = { view: view };
+    try{
+      if(replace){
+        history.replaceState(state, '');
+      } else {
+        history.pushState(state, '');
+      }
+    }catch(err){
+      // history API를 사용할 수 없는 샌드박스 환경이면 화면 전환만 유지
+    }
+  }
+
+  function showAbout(){ navigateTo('about'); }
+  function showHome(){ navigateTo('home'); }
+
+  function goAbout(){ showAbout(); }
+  function goSection(id){
+    showHome();
+    requestAnimationFrame(function(){
+      const el = document.getElementById(id);
+      if(el){ el.scrollIntoView(); }
+    });
+  }
+
+  // 상세 페이지 상단 "뒤로가기" 버튼: 브라우저 히스토리가 있으면 뒤로, 없으면 홈으로 이동
+  function goBack(){
+    if(history.state && history.state.view && history.length > 1){
+      history.back();
+    } else {
+      showHome();
+    }
+  }
+
+  // 브라우저 뒤로가기/앞으로가기 버튼 처리
+  window.addEventListener('popstate', function(e){
+    const view = (e.state && e.state.view) ? e.state.view : 'home';
+    renderView(view);
+  });
+
+  // 최초 진입 시 초기 history state를 세팅 (URL은 변경하지 않음)
+  (function initView(){
+    renderView('home');
+    try{
+      history.replaceState({ view: 'home' }, '');
+    }catch(err){}
+  })();
+
+  document.querySelectorAll('#mainnav a').forEach(a=>{
+    a.addEventListener('click', ()=>{
+      const nav = document.getElementById('mainnav');
+      const btn = document.getElementById('navToggle');
+      nav.classList.remove('open');
+      btn.classList.remove('active');
+      btn.textContent = '☰';
+      btn.setAttribute('aria-expanded', false);
+    });
+  });
+</script>
+
+</body>
+</html>
